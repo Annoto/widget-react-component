@@ -19,13 +19,13 @@ const VideoJS = (props) => {
 
         // Configurations can be initialized only after videoRef initialization
         setWidgetConfig({
+            // Set to provided clientId
+            // clientId: '...',
             widgets: [
                 {
                     player: {
                         type: 'videojs',
-                        params: {
-                            videojs,
-                        },
+                        params: { videojs },
                         element: videoRef.current,
                     },
                     timeline: {
@@ -33,14 +33,12 @@ const VideoJS = (props) => {
                     },
                 },
             ],
-            demoMode: true,
-            demoDiscussion: 'aws-e-learning',
         });
     }, [videoRef]);
 
     useAnnoto(widgetConfig, videoRef);
 
-    // An example of a secure single login. This method can be called at any time
+    // An example of a secure SSO login. This method can be called at any time
     const auth = async (userToken) => {
         if (window.Annoto.api) {
             await window.Annoto.api.auth(userToken);
@@ -90,7 +88,7 @@ const VideoJS = (props) => {
                 ref={videoRef}
                 className="video-js vjs-big-play-centered"
             >
-                <source src="https://demo-assets.annoto.net/e-learning.mp4" type="video/mp4"/>
+                <source src="https://demo-assets.annoto.net/portals.mp4" type="video/mp4"/>
                 Your browser does not support HTML5 video.
             </video>
         </div>

@@ -9,6 +9,7 @@ const VideoJS = (props) => {
     const { options, onReady } = props;
 
     /*-------------------------------------Annoto-----------------------------------------*/
+    const videoWrapRef = React.useRef(null);
     // Store configurations in a state. This will avoid unnecessary re-renders
     const [widgetConfig, setWidgetConfig] = useState(null);
 
@@ -26,7 +27,7 @@ const VideoJS = (props) => {
                     player: {
                         type: 'videojs',
                         params: { videojs },
-                        element: videoRef.current,
+                        element: videoWrapRef.current,
                     },
                     timeline: {
                         overlay: true,
@@ -34,9 +35,9 @@ const VideoJS = (props) => {
                 },
             ],
         });
-    }, [videoRef]);
+    }, [videoWrapRef]);
 
-    useAnnoto(widgetConfig, videoRef);
+    useAnnoto(widgetConfig);
 
     // An example of a secure SSO login. This method can be called at any time
     const auth = async (userToken) => {
@@ -83,7 +84,7 @@ const VideoJS = (props) => {
     }, [playerRef]);
 
     return (
-        <div data-vjs-player>
+        <div data-vjs-player ref={videoWrapRef}>
             <video
                 ref={videoRef}
                 className="video-js vjs-big-play-centered"
